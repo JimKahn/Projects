@@ -30,8 +30,8 @@ If the MAC is on a virtual machine, the exit code will be 0.
 Otherwise, the exit code will be non-zero.
 
 ## Installation
-This utility requires Python 3.7.4. Earlier versions
-of Python 3 may be problematic due to SSL service changes.
+This utility requires Python 3.6 or later. Earlier versions
+of Python 3 may be problematic due to SSL API changes.
 
 Python 2 is not supported.
 
@@ -55,3 +55,7 @@ CA certificates are not configured for this utility.  This
 is desirable for an extra layer of security.
 
 
+## Testing
+
+A test script test.sh is provided for validating the macklookup CLI interface.
+Simply run the script to verify CLI functionality.
