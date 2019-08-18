@@ -1,23 +1,25 @@
 #! /bin/bash
 # Exercise maclookup.py CLI interface.
 
-errors=0
-logfile="test.log"
-
-
 # Command to be tested.
 cmd="./maclookup.py"
 
 # Test list.  Eac
 testList=(
-  #Name         Status  Args
-  "Normal"      "0"    "8c:85:90:48:90:0e --key=at_BXvpv8y2ypYtWCZUVsZS5JV26rOvv"
+  #Name         Status  Args -- Normal test cases
+  "Real MAC"    "0"    "8c:85:90:48:90:0e --key=at_BXvpv8y2ypYtWCZUVsZS5JV26rOvv"
+  "Docker MAC"  "0"    "02:42:ac:12:00:02 --key=at_BXvpv8y2ypYtWCZUVsZS5JV26rOvv"
+  #Name         Status  Args -- Error test cases
   "Invalid MAC" "19"   "85:90:48:90:0e --key=at_BXvpv8y2ypYtWCZUVsZS5JV26rOvv"
   "Invalid Key" "5"    "8c:85:90:48:90:0e --key=BXvpv8y2ypYtWCZUVsZS5JV26rOvv"
   "No Key"      "2"    "8c:85:90:48:90:0e"
   "No Args"     "2"    ""
   ""
 )
+
+
+# Logging file.
+logfile="test.log"
 
 echo "Starting maclookup tests"
 rm -rf ${logfile}
@@ -27,6 +29,7 @@ rm -rf ${logfile}
 #
 i=0
 test=1
+errors=0
 testname=${testList[((i++))]}
 while [ -n  "$testname" ]; do
     result=${testList[((i++))]}
@@ -41,7 +44,7 @@ while [ -n  "$testname" ]; do
         echo "Test ${test} ${testname}: failed: status ${rc} should be ${result}" >> ${logfile}
         echo "Test ${test} ${testname}: failed: status ${rc} should be ${result}"
     else
-        echo "Test ${test} ${testname}: passed" >> ${logfile}
+       echo "Test ${test} ${testname}: passed" >> ${logfile}
         echo "Test ${test} ${testname}: passed"
     fi
     echo "" >> ${logfile}

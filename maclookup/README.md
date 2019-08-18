@@ -58,4 +58,7 @@ is desirable for an extra layer of security.
 ## Testing
 
 A test script test.sh is provided for validating the macklookup CLI interface.
-Simply run the script to verify CLI functionality.
+Simply run the script to verify CLI functionality.  A test summary will be printed
+on the console log.  The file "test.log" will contain a detailed record of the testing.
+
+    > ./test.sh

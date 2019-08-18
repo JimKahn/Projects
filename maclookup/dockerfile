@@ -1,0 +1,22 @@
+# Docker Ubuntu client for mac lookup utility.
+# V1
+
+FROM ubuntu:18.04
+MAINTAINER James Kahn "jkahn76@gmail.com"
+RUN  apt-get update  &&  apt-get -y install \
+     apt-utils \
+     net-tools \
+     iputils-ping \
+     openssh-server
+
+RUN mkdir /root/.ssh
+COPY maclookup.py /root/
+COPY test.sh /root/
+#COPY jim.id_ecdsa.pub /root/.ssh/authorized_keys
+ENV TERM xterm
+EXPOSE 22
+EXPOSE 80
+EXPOSE 443
+
+#CMD ["/usr/sbin/sshd", "-D", "-r"]
+
