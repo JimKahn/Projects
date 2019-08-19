@@ -1,21 +1,21 @@
 #! /bin/bash
-# Docker container build.
+# Docker run maclookup container.
 
-# Name of maclookup container.
-container_name="client"
+# Container run Name.
+container_name="maclookup"
 
-# Using recent Ubuntu LTS distribution.
-image_name="ubuntu_client:18.04"
+# Docker Hub image name.
+image_name="jimkahm/maclookup:latest"
 
 
 # Usage message
 usage()
 {
-    echo "Builder for maclookup container"
-    echo "Usage: docker-build.sh [rm | attach]"
+    echo "Run maclookup container"
+    echo "Usage: run-container.sh [rm | attach]"
     echo
-    echo "rm     - Remove previously built container"
-    echo "attach - Restart and attach previously built container"
+    echo "rm     - Remove previously run container"
+    echo "attach - Restart and attach previously run container"
 }
 
 # Check if container can be restarted.
@@ -53,7 +53,7 @@ fi
 #
 # If no optional arguments, build a new container.
 #
-docker build -t ${image_name} .
+docker pull ${image_name}
 
 # Use bridge network to allow access to external network.
 docker run -it --net=bridge --name=${container_name} ${image_name} /bin/bash
