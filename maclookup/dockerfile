@@ -7,12 +7,21 @@ RUN  apt-get update  &&  apt-get -y install \
      apt-utils \
      net-tools \
      iputils-ping \
+     ca-certificates \
      openssh-server
 
-RUN mkdir /root/.ssh
-COPY maclookup.py /root/
-COPY test.sh /root/
-#COPY jim.id_ecdsa.pub /root/.ssh/authorized_keys
+# TBD: Add CA certificates.
+# XX: If certificates added, do not check container into public repository.
+#ADD <ca_root.crt> /usr/local/share/ca-certificates
+#RUN chmod 0644 /usr/local/share/ca-certificates/<ca_root.crt>
+#RUN update-ca-certificates
+
+# Add admin user account.
+RUN useradd -ms /bin/bash admin
+USER admin
+WORKDIR /home/admin
+COPY maclookup.py .
+COPY test.sh .
 ENV TERM xterm
 EXPOSE 22
 EXPOSE 80
