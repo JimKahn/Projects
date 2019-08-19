@@ -178,7 +178,11 @@ class socket_connection():
         """
         #print(response)
         if response['status'] < HTTP_BAD_REQUEST:
-            vendor = response['vendorDetails']
+            if response['vendorDetails']:
+                vendor = response['vendorDetails']
+            else:
+                vendor = 'no vendor'
+
             macinfo = response['macAddressDetails']
             if macinfo['isValid']:
                 info = 'MAC ' + macinfo['searchTerm'] + ' (' + vendor['companyName'] + ') '
@@ -309,7 +313,11 @@ class http_connection():
         """
         #print(response)
         if response['status'] < HTTP_BAD_REQUEST:
-            vendor = response['vendorDetails']
+            if response['vendorDetails']:
+                vendor = response['vendorDetails']
+            else:
+                vendor = 'unknown vendor'
+
             macinfo = response['macAddressDetails']
             if macinfo['isValid']:
                 info = 'MAC ' + macinfo['searchTerm'] + ' (' + vendor['companyName'] + ') '
