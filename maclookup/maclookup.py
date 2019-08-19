@@ -178,14 +178,14 @@ class socket_connection():
         """
         #print(response)
         if response['status'] < HTTP_BAD_REQUEST:
-            if response['vendorDetails']:
-                vendor = response['vendorDetails']
-            else:
-                vendor = 'no vendor'
-
+            vendor = response['vendorDetails']
             macinfo = response['macAddressDetails']
             if macinfo['isValid']:
-                info = 'MAC ' + macinfo['searchTerm'] + ' (' + vendor['companyName'] + ') '
+                if vendor['companyName']:
+                    company = vendor['companyName']
+                else:
+                    company = 'unknown vendor'
+                info = 'MAC ' + macinfo['searchTerm'] + ' (' + company + ') '
                 if macinfo['virtualMachine'] != 'Not detected':
                     info = info +  'on Virtual Machine'
             else:
@@ -313,14 +313,14 @@ class http_connection():
         """
         #print(response)
         if response['status'] < HTTP_BAD_REQUEST:
-            if response['vendorDetails']:
-                vendor = response['vendorDetails']
-            else:
-                vendor = 'unknown vendor'
-
+            vendor = response['vendorDetails']
             macinfo = response['macAddressDetails']
             if macinfo['isValid']:
-                info = 'MAC ' + macinfo['searchTerm'] + ' (' + vendor['companyName'] + ') '
+                if vendor['companyName']:
+                    company = vendor['companyName']
+                else:
+                    company = 'unknown vendor'
+                info = 'MAC ' + macinfo['searchTerm'] + ' (' + company + ') '
                 if macinfo['virtualMachine'] != 'Not detected':
                     info = info +  'on Virtual Machine'
             else:
