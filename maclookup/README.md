@@ -47,7 +47,7 @@ Manual installation consists of copying the following files to the server:
   * test.sh          - test cases for lookup utility
   * run-container.sh - Docker container deployment script
 
-An easier method is to simply use the git:
+An easier method is to simply check out a copy of these files from the github repository:
   > git clone https://git@github.com/JimKahn/Projects .
 
 
@@ -68,7 +68,7 @@ To run the valdiation test, type:
 Each test status and a test summary will be displayed on the console.
 The file test.log contains more detailed test results.
 
-You can also manually run maclook.py utility and provide the MAC addres and
+You can also manually run the maclookup.py utility and provide the MAC address and
 API_KEY.
 
 
