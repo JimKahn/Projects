@@ -48,7 +48,7 @@ Manual installation consists of copying the following files to the server:
   * run-container.sh - Docker container deployment script
 
 An easier method is to simply use the git:
-  > git clone https://git@github.com/JimKahn/Projets .
+  > git clone https://git@github.com/JimKahn/Projects .
 
 
 ### Docker Container Installation
