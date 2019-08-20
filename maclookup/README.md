@@ -17,7 +17,7 @@ The MAC is of the form "8c:85:90:48:90:0e".
 The API_KEY is of  the form "qewrpoiupuasdfzcxvqewrpoiupuasd".
 Both the MAC and the KEY must be provided for proper operation.
 
-The mac information will be display in the console terminal window.
+The MAC information will be display in the console terminal window.
 If the MAC is valid, the exit code will be zero.
 If any error occurs, the exit code will be a non-zero.
 
@@ -54,8 +54,8 @@ An easier method is to simply check out a copy of these files from the github re
 ### Docker Container Installation
 A Docker container is provided  on docker hub.
 The deploy the maclookup container:
-  > docker login
-  > ./run-container.sh
+  * docker login
+  * ./run-container.sh
 
 The docker login step requires a docker username and password.
 Once the login is completed, just run the "run-container.sh" script
