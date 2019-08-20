@@ -75,7 +75,7 @@ API_KEY.
 # Design Overview
 
 This macklookup.py is a Python3 script using the socket API
-to open an session on port 443.  The socket is wrapped
+to open a session on port 443.  The socket is wrapped
 in an SSL API which performs the negotiation and data transfer.
 It also handles the certifiate check.  (Prior to Python3.2,
 the API did not handle certificate checking and it used
