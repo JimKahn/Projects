@@ -7,13 +7,18 @@ cmd="./maclookup.py"
 # Test list.  Eac
 testList=(
   #Name         Status  Args -- Normal test cases
-  "Real MAC"    "0"    "8c:85:90:48:90:0e --key=at_BXvpv8y2ypYtWCZUVsZS5JV26rOvv"
-  "Docker MAC"  "0"    "02:42:ac:12:00:02 --key=at_BXvpv8y2ypYtWCZUVsZS5JV26rOvv"
-  #Name         Status  Args -- Error test cases
-  "Invalid MAC" "19"   "85:90:48:90:0e --key=at_BXvpv8y2ypYtWCZUVsZS5JV26rOvv"
-  "Invalid Key" "5"    "8c:85:90:48:90:0e --key=BXvpv8y2ypYtWCZUVsZS5JV26rOvv"
-  "No Key"      "2"    "8c:85:90:48:90:0e"
-  "No Args"     "2"    ""
+  "Real MAC"              "0"   "8c:85:90:48:90:0e --key=at_BXvpv8y2ypYtWCZUVsZS5JV26rOvv"
+  "Docker MAC"          "0"   "02:42:ac:12:00:02 --key=at_BXvpv8y2ypYtWCZUVsZS5JV26rOvv"
+  "Real short MAC"      "0"   "8c859048900e --key=at_BXvpv8y2ypYtWCZUVsZS5JV26rOvv"
+  "Docker short MAC"  "0"   "0242ac120002 --key=at_BXvpv8y2ypYtWCZUVsZS5JV26rOvv"
+    #Name         Status  Args -- Error test cases
+  "Invalid MAC"        "19"  "85:90:48:90:0e --key=at_BXvpv8y2ypYtWCZUVsZS5JV26rOvv"
+  "Invalid long MAC"  "22"   "8c:85:90:48:90:0e:55:22 --key=at_BXvpv8y2ypYtWCZUVsZS5JV26rOvv"
+  "Invalid Key"         "5"  "8c:85:90:48:90:0e --key=BXvpv8y2ypYtWCZUVsZS5JV26rOvv"
+  "Invalid long Key"  "22"    "8c:85:90:48:90:0e --key=BXvpv8y2ypYtWCZUVsZS5JV26rOvvaxytzeyt"
+  "No MAC"             "2"    "--key=BXvpv8y2ypYtWCZUVsZS5JV26rOvvaxytzeyt"
+  "No Key"              "2"    "8c:85:90:48:90:0e"
+  "No Args"             "2"    ""
   ""
 )
 
@@ -37,7 +42,7 @@ while [ -n  "$testname" ]; do
 
     echo "${cmd} ${args}" >> ${logfile}
 
-    (${cmd} ${args}  &>> ${logfile})
+    (${cmd} ${args}  >> ${logfile} 2>&1)
     rc=$?
     if [ "$rc" != "$result" ]; then
         ((errors++))

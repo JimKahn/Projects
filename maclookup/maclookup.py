@@ -31,10 +31,13 @@ import sys
 import errno
 
 utilName = 'maclookup'
+MAX_KEY_LEN   = 32      # Maximum expected API key length
+MAX_MAC_LEN   = len('xx:xx:xx:xx:xx:xx')      # Maximum MAC length
+MAX_MAC_SEPERATORS = 6 -1   # Max number of  colons
 
-HTTP_BAD_REQUEST = 400       # >400 is a failure.
-HTTP_OK_REQUEST  = 300       # <300 is OK; >= 300 is bad news.
-API_KEY_MIN      = 8         # If api key is <8 characters, it's probably bad.
+HTTP_BAD_REQUEST = 400   # >400 is a failure.
+HTTP_OK_REQUEST  = 300   # <300 is OK; >= 300 is bad news.
+API_KEY_MIN      = 8             # If api key is <8 characters, it's probably bad.
 HTTPS_PORT       = 443       # Use SSL encryption on this port
 
 
@@ -350,6 +353,16 @@ def main():
     parser.add_argument('--isvm', dest='isvm',  action='store_true',
                         help='Check if MAC is on a virtual machine') 
     args = parser.parse_args()
+
+    # Basic sanity checking of inputs to minimize security issues.
+    if len(args.mac) > MAX_MAC_LEN or len(args.mac) < (MAX_MAC_LEN - MAX_MAC_SEPERATORS):
+       print('ERROR: MAC address invalid:', args.mac)
+       sys.exit(errno.EINVAL)
+    # API key is invalid if  length is excessive.
+    if len(args. api_key) > MAX_KEY_LEN:
+        print('ERROR: API Key invalid:', args.api_key)
+        sys.exit(errno.EINVAL)
+
 
     # macaddress web site definitions.
     serverURL = 'macaddress.io'
