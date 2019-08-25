@@ -76,12 +76,17 @@ class socket_connection():
 
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         if port == HTTPS_PORT:
-            # If using HTTPS, need to configure ssl.
+            # If using HTTPS, need to configure ssl and set TLS protocol floor.
             # XX: Should provide client CA cert too.
-            ctx = ssl.create_default_context()
+            ctx = ssl.create_default_context(ssl.Purpose.SERVER_AUTH)
+            ctx.options |= ssl.OP_NO_TLSv1_1 | ssl.OP_NO_TLSv1 | ssl.OP_NO_SSLv3 | ssl.OP_NO_SSLv2
+            #print(ctx.options)
+            # TBD.
+            #cts.load_cert_chain(certfile=client.cert, keyfile=client.key)
             self.connection = ctx.wrap_socket(self.socket, server_hostname=serverURL)
             #print(self.connection.version)
             self.connection.connect((serverURL, port))
+            #print('SSL connection established. Peer:', self.connection.getpeercert())
         else:
             # If using HTTP, just open the connection.
             self.connection = self.socket
