@@ -81,6 +81,10 @@ It also handles the certificate check.  (Prior to Python3.2,
 the API did not handle certificate checking and it used
 older deprecated SSL protocols.)
 
+SSL connection is configured to prohibit depreacted connection protocols.
+TLS version 1.2 or higher are supported. Basic server certifacation checking
+is performaed.  
+
 Duplicating the Python SSL API would take longer as you would
 need to manage the SSL negotiation and certification validation.
 
